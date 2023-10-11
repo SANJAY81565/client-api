@@ -9,4 +9,13 @@ let hashPassword = (myPlaintextPassword) =>{
     
 }
 
-module.exports = {hashPassword}
+let comparePass = (plainPass, passFromDb) =>{
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(plainPass, passFromDb, function(err, result) {
+            if (err) reject(err)
+            resolve(result);
+        });
+    })
+}
+
+module.exports = {hashPassword, comparePass}
